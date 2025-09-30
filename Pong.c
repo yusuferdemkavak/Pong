@@ -32,6 +32,7 @@ int main()
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Pong: The Game");
 
     SetTargetFPS(60); // Set FPS: 60
+    ToggleFullscreen(); // sets Fullscreen
 
     // Playground Window
     Rectangle Playground;
@@ -182,7 +183,7 @@ int main()
     TODO:
 
     1. Player Movement DONE
-    2. Ball Movement
+    2. Ball Movement DONE
         2.1. Collision Detection DONE
         2.2. Velocity Summing DONE
     3. CPU Movement DONE
