@@ -3,6 +3,19 @@
 
 #include "properties.h"
 
+typedef enum
+{
+    WAITING,
+    PLAYING
+} GameState;
+
+extern double StartTime;
+
+extern GameState State;
+
 void ResetGame();
+void StartGame();
+void MoveObjects();
+void CheckCollisions();
 
 #endif

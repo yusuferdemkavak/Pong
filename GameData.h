@@ -21,10 +21,17 @@
 typedef struct
 {
     Rectangle transform;
-    int VelocityX;
-    int VelocityY;
+    Vector2 Velocity;
     Color color;
 } Object;
+
+// Client Enum
+typedef enum
+{
+    None,
+    ClientPlayer,
+    ClientCPU
+} Client;
 
 // Starting Data //
 //--------------------//
@@ -40,8 +47,12 @@ extern Rectangle PlaygroundBorder;
 extern Object Player;
 extern Object CPU;
 extern Object Ball;
+
+//Clients
+extern Client Winner;
 //--------------------//
 
 void SetStartingData();
+void SetPositionData();
 
 #endif

@@ -3,6 +3,6 @@
 
 #include "properties.h"
 
-void DrawScoreBoard(const char * PlayerScore, const char * CPUScore);
+void DrawScoreBoard(int PlayerScore, int CPUScore);
 
 #endif
