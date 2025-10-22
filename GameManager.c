@@ -1,39 +1,69 @@
 #include "GameManager.h"
 
-// Time
-double StartTime;
+// Reset Game //
+//--------------------//
+void ResetGame()
+{
+    PlayerScore = 0;
+    BotScore = 0;
 
-// Game State
-GameState State;
+    ResetRound(ClientNone);
+}
+//--------------------//
 
-void ResetGame(Client winner)
+// Reset Round //
+//--------------------//
+void ResetRound(Client winner)
 {
     switch (winner)
     {
     case ClientPlayer:
         PlayerScore++;
         break;
-    case ClientCPU:
-        CPUScore++;
+    case ClientBot:
+        BotScore++;
         break;
     default:
         break;
     }
 
-    Winner = None;
+    Winner = ClientNone;
     SetPositionData();
-    State = WAITING;
+    isWaiting = true;
     StartTime = GetTime();
+    Time2Wait = 1;
 }
+//--------------------//
 
-void StartGame()
+// Start Game/Round //
+//--------------------//
+void StartRound()
 {
     int StartingDirection = GetRandomValue(0, 1) ? 1 : -1;
 
     Ball.Velocity.x = 10 * StartingDirection;
     Ball.Velocity.y = 2 * GetRandomValue(0, 2);
-    State = PLAYING;
+    isWaiting = false;
 }
+//--------------------//
+
+// Rendering//
+//--------------------//
+// Rendering Objects
+void RenderObjects()
+{
+        DrawRectangleRec(Player.transform, Player.color); // Render Player
+        DrawRectangleRec(Bot.transform, Bot.color); // Render Bot
+        DrawRectangleRec(Ball.transform, Ball.color); // Render Ball
+}
+
+// Rendering Playground
+void RenderPlayground()
+{
+    DrawRectangleRec(PlaygroundBorder, WHITE); // Draws Playground Border
+    DrawRectangleRec(Playground, BLACK); // Draws Playground
+}
+//--------------------//
 
 // Moving Objects //
 //--------------------//
@@ -43,24 +73,24 @@ void MoveObjects()
     Player.transform.x += Player.Velocity.x;
     Player.transform.y += Player.Velocity.y;
 
-    // CPU Movement
-    if (Vector2Distance((Vector2){Ball.transform.x, Ball.transform.y}, (Vector2){CPU.transform.x, CPU.transform.y}) < PLAYGROUND_WIDTH / 2)
-        if (Ball.transform.y + (Ball.transform.height / 2) < CPU.transform.y + (CPU.transform.height / 2))
-            CPU.Velocity.y = -4;
-        else if (Ball.transform.y + (Ball.transform.height / 2) > CPU.transform.y + (CPU.transform.height / 2))
-            CPU.Velocity.y = 4;
+    // Bot Movement
+    if (Vector2Distance((Vector2){Ball.transform.x, Ball.transform.y}, (Vector2){Bot.transform.x, Bot.transform.y}) < PLAYGROUND_WIDTH / 2)
+        if (Ball.transform.y + (Ball.transform.height / 2) < Bot.transform.y + (Bot.transform.height / 2))
+            Bot.Velocity.y = -4;
+        else if (Ball.transform.y + (Ball.transform.height / 2) > Bot.transform.y + (Bot.transform.height / 2))
+            Bot.Velocity.y = 4;
         else
-            CPU.Velocity.y = 0;
+            Bot.Velocity.y = 0;
     else 
-        if (CPU.transform.y + CPU.transform.height / 2 > PLAYGROUND_POSY + PLAYGROUND_CENTER_Y)
-            CPU.Velocity.y = -4;
-        else if (CPU.transform.y + CPU.transform.height / 2 < PLAYGROUND_POSY + PLAYGROUND_CENTER_Y)
-            CPU.Velocity.y = 4;
+        if (Bot.transform.y + Bot.transform.height / 2 > PLAYGROUND_POSY + PLAYGROUND_CENTER_Y)
+            Bot.Velocity.y = -4;
+        else if (Bot.transform.y + Bot.transform.height / 2 < PLAYGROUND_POSY + PLAYGROUND_CENTER_Y)
+            Bot.Velocity.y = 4;
         else
-            CPU.Velocity.y = 0;
+            Bot.Velocity.y = 0;
 
-    CPU.transform.x += CPU.Velocity.x;
-    CPU.transform.y += CPU.Velocity.y;
+    Bot.transform.x += Bot.Velocity.x;
+    Bot.transform.y += Bot.Velocity.y;
 
     //Ball Movement
     Ball.transform.x += Ball.Velocity.x;
@@ -85,16 +115,16 @@ void CheckCollisions()
         Player.transform.y = (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - Player.transform.height;
     }
     
-    // CPU Collision
-    if (CPU.transform.y <= PLAYGROUND_POSY)
+    // Bot Collision
+    if (Bot.transform.y <= PLAYGROUND_POSY)
     {
-        CPU.Velocity.y = 0;
-        CPU.transform.y = PLAYGROUND_POSY;
+        Bot.Velocity.y = 0;
+        Bot.transform.y = PLAYGROUND_POSY;
     }
-    else if (CPU.transform.y >= (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - CPU.transform.height)
+    else if (Bot.transform.y >= (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - Bot.transform.height)
     {
-        CPU.Velocity.y = 0;
-        CPU.transform.y = (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - CPU.transform.height;
+        Bot.Velocity.y = 0;
+        Bot.transform.y = (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - Bot.transform.height;
     }
 
     // Ball Collision
@@ -103,23 +133,23 @@ void CheckCollisions()
         Ball.Velocity.x *= -1;
         Ball.Velocity.y += Player.Velocity.y / 2;
     }
-    else if (CheckCollisionRecs(Ball.transform, CPU.transform))
+    else if (CheckCollisionRecs(Ball.transform, Bot.transform))
     {
         Ball.Velocity.x *= -1;
-        Ball.Velocity.y += CPU.Velocity.y / 2;
+        Ball.Velocity.y += Bot.Velocity.y / 2;
     }
     else if (Ball.transform.y <= PLAYGROUND_POSY || Ball.transform.y >= (PLAYGROUND_POSY + PLAYGROUND_HEIGHT) - Ball.transform.height)
         Ball.Velocity.y *= -1;
     
     if (Ball.transform.x <= PLAYGROUND_POSX - Ball.transform.width)
     {
-        Winner = ClientCPU;
-        ResetGame(Winner);
+        Winner = ClientBot;
+        ResetRound(Winner);
     }
     else if (Ball.transform.x >= PLAYGROUND_POSX + PLAYGROUND_WIDTH)
     {
         Winner = ClientPlayer;
-        ResetGame(Winner);
+        ResetRound(Winner);
     }        
 }
 //--------------------//

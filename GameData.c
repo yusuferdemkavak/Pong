@@ -4,7 +4,7 @@
 //--------------------//
 // Scores
 int PlayerScore;
-int CPUScore;
+int BotScore;
 
 // Playground Window
 Rectangle Playground;
@@ -12,20 +12,46 @@ Rectangle PlaygroundBorder;
 
 //Objects
 Object Player;
-Object CPU;
+Object Bot;
 Object Ball;
 
 //Clients
 Client Winner;
+
+// Game State
+GameState State;
+
+// Mouse Position
+Vector2 MousePosition;
+
+// Time
+double StartTime;
+double Time2Wait;
+
+// Bools
+int isWaiting;
 //--------------------//
 
+// Setting Data //
+//--------------------//
 void SetStartingData()
 {
     // Scores Starting Data
     PlayerScore = 0;
-    CPUScore = 0;
+    BotScore = 0;
     
-    Winner = None;
+    // Winner Starting Data
+    Winner = ClientNone;
+
+    // Game State Starting Data
+    State = InMenus;
+
+    // Time Starting Data
+    StartTime = GetTime();
+    Time2Wait = 1.0;
+
+    // Bools Starting Data
+    isWaiting = false;
     
     // Playground Data
     Playground.width = PLAYGROUND_WIDTH;
@@ -52,14 +78,14 @@ void SetPositionData()
     Player.Velocity.x = 0;
     Player.Velocity.y = 0;
     
-    // CPU Position Data
-    CPU.transform.width = 20; // CPU Width
-    CPU.transform.height = 100; // CPU Height
-    CPU.transform.x = PLAYGROUND_WIDTH - (20 + CPU.transform.width) + PLAYGROUND_POSX; // CPU X Position
-    CPU.transform.y = PLAYGROUND_CENTER_Y - (CPU.transform.height / 2) + PLAYGROUND_POSY; // CPU Y Position
-    CPU.color = WHITE; // CPU Color
-    CPU.Velocity.x = 0;
-    CPU.Velocity.y = 0;
+    // Bot Position Data
+    Bot.transform.width = 20; // Bot Width
+    Bot.transform.height = 100; // Bot Height
+    Bot.transform.x = PLAYGROUND_WIDTH - (20 + Bot.transform.width) + PLAYGROUND_POSX; // Bot X Position
+    Bot.transform.y = PLAYGROUND_CENTER_Y - (Bot.transform.height / 2) + PLAYGROUND_POSY; // Bot Y Position
+    Bot.color = WHITE; // Bot Color
+    Bot.Velocity.x = 0;
+    Bot.Velocity.y = 0;
     
     // Ball Position Data
     Ball.transform.width = 20; // Ball Width
@@ -70,3 +96,4 @@ void SetPositionData()
     Ball.Velocity.x = 0;
     Ball.Velocity.y = 0;
 }
+//--------------------//

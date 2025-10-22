@@ -18,7 +18,7 @@
 #define PLAYGROUND_POSY (WINDOW_HEIGHT - PLAYGROUND_HEIGHT) / 2
 
 // Object Struct
-typedef struct
+typedef struct Object
 {
     Rectangle transform;
     Vector2 Velocity;
@@ -28,16 +28,24 @@ typedef struct
 // Client Enum
 typedef enum
 {
-    None,
+    ClientNone,
     ClientPlayer,
-    ClientCPU
+    ClientBot
 } Client;
+
+// Game State Enum
+typedef enum
+{
+    InMenus,
+    InGame,
+    Paused
+} GameState;
 
 // Starting Data //
 //--------------------//
 // Scores
 extern int PlayerScore;
-extern int CPUScore;
+extern int BotScore;
 
 // Playground Window
 extern Rectangle Playground;
@@ -45,14 +53,27 @@ extern Rectangle PlaygroundBorder;
 
 //Objects
 extern Object Player;
-extern Object CPU;
+extern Object Bot;
 extern Object Ball;
 
 //Clients
 extern Client Winner;
+
+// Game State
+extern GameState State;
+
+// Mouse Position
+extern Vector2 MousePosition;
+
+// Time
+extern double StartTime;
+extern double Time2Wait;
+
+// Bools
+extern int isWaiting;
 //--------------------//
 
-void SetStartingData();
-void SetPositionData();
+void SetStartingData(void);
+void SetPositionData(void);
 
 #endif

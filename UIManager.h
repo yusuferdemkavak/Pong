@@ -3,6 +3,20 @@
 
 #include "properties.h"
 
-void DrawScoreBoard(int PlayerScore, int CPUScore);
+void DrawMainMenu(void);
+void DrawSettingsMenu(void);
+void DrawShopMenu(void);
+void DrawGameMenu(void);
+void DrawPauseMenu(void);
+void DrawGameOverMenu(void);
+void DrawScoreBoard(int PlayerScore, int BotScore);
+void OnClickStartButton(void);
+void OnClickSettingsButton(void);
+void OnClickShopButton(void);
+void OnClickRetryButton(void);
+void OnClickHomeButton(void);
+void OnClickExitButton(void);
+void DrawButton();
+int CheckMouseHover(Rectangle area);
 
 #endif
