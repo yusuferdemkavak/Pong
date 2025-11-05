@@ -15,6 +15,7 @@ void OnClickSettingsButton(void);
 void OnClickShopButton(void);
 void OnClickRetryButton(void);
 void OnClickHomeButton(void);
+void OnClickContinueButton(void);
 void OnClickExitButton(void);
 void DrawButton();
 int CheckMouseHover(Rectangle area);

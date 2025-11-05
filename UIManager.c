@@ -34,7 +34,12 @@ void DrawGameMenu()
 // Pause Menu UI
 void DrawPauseMenu()
 {
-    
+    DrawRectangle(WINDOW_CENTER_X - 370, WINDOW_CENTER_Y - 270, 740, 540, WHITE);
+    DrawRectangle(WINDOW_CENTER_X - 350, WINDOW_CENTER_Y - 250, 700, 500, BLACK);
+    DrawText("Paused!", WINDOW_CENTER_X - MeasureText("Paused!", 60) / 2, WINDOW_CENTER_Y - 175, 60, WHITE);
+    DrawButton(Buttons[ButtonHome_Pause]);
+    DrawButton(Buttons[ButtonRetry_Pause]);
+    DrawButton(Buttons[ButtonContinue_Pause]);
 }
 
 // Game Over Menu UI
@@ -68,6 +73,7 @@ void DrawScoreBoard(int PlayerScore, int BotScore)
 void OnClickStartButton()
 {
     State = InGame;
+    ResetGame();
     StartTime = GetTime();
     isWaiting = true;
     Menu = GameMenu;
@@ -88,14 +94,19 @@ void OnClickShopButton()
 // Retry Button
 void OnClickRetryButton()
 {
-    ResetGame();
     OnClickStartButton();
 }
 
 // Home Button
 void OnClickHomeButton()
 {
+    State = InMenus;
     Menu = MainMenu;
+}
+
+void OnClickContinueButton()
+{
+    State = InGame;
 }
 
 // Exit Button

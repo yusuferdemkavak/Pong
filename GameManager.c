@@ -1,5 +1,71 @@
 #include "GameManager.h"
 
+// Check Game State //
+//--------------------//
+void CheckState()
+{
+    switch (State)
+        {
+        case InMenus:
+            // Render UI
+            switch (Menu)
+            {
+            case MainMenu:
+                DrawMainMenu();
+                break;
+            case SettingsMenu:
+                DrawSettingsMenu();
+                break;
+            case ShopMenu:
+                DrawShopMenu();
+                break;
+            case GameOverMenu:
+                DrawGameOverMenu();
+                break;
+            default:
+                break;
+            }
+            break;
+        case InGame:
+            HideCursor(); // Hides Cursor
+
+            // Rendering Game Elements
+            RenderPlayground();
+            RenderObjects();
+
+            // Rendering UI
+            DrawGameMenu();
+            
+            // Timer
+            if (GetTime() - StartTime >= Time2Wait && isWaiting)
+            {
+                StartRound();
+            }
+    
+            // Handling Physics
+            MoveObjects();
+            CheckCollisions();
+
+            CheckGameEnd();
+    
+            break;
+        case Paused:
+            ShowCursor(); // Shows Cursor
+
+            // Rendering Game Elements
+            RenderPlayground();
+            RenderObjects();
+
+            // Rendering UI
+            DrawGameMenu();
+            DrawPauseMenu();
+            break;
+        default:
+            break;
+        }
+}
+//--------------------//
+
 // Reset Game //
 //--------------------//
 void ResetGame()
@@ -44,6 +110,36 @@ void StartRound()
     Ball.Velocity.x = 10 * StartingDirection;
     Ball.Velocity.y = 2 * GetRandomValue(0, 2);
     isWaiting = false;
+}
+//--------------------//
+
+// Check Game End //
+//--------------------//
+void CheckGameEnd()
+{
+    if (PlayerScore >= 5)
+        EndGame(ClientPlayer);
+    else if (BotScore >= 5)
+        EndGame(ClientBot);
+}
+//--------------------//
+
+// End Game //
+//--------------------//
+void EndGame(Client winner)
+{
+    switch (winner)
+    {
+    case ClientPlayer:
+        break;
+    case ClientBot:
+        break;
+    default:
+        break;
+    }
+
+    State = InMenus;
+    Menu = GameOverMenu;
 }
 //--------------------//
 

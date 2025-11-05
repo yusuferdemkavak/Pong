@@ -54,46 +54,67 @@ void SetStartingData()
     isWaiting = false;
     
     // Playground Data
-    Playground.width = PLAYGROUND_WIDTH;
-    Playground.height = PLAYGROUND_HEIGHT;
-    Playground.x = PLAYGROUND_POSX;
-    Playground.y = PLAYGROUND_POSY;
+    Playground = (Rectangle){
+        .width = PLAYGROUND_WIDTH,
+        .height = PLAYGROUND_HEIGHT,
+        .x = PLAYGROUND_POSX,
+        .y = PLAYGROUND_POSY
+    };
     
     // Playground Border Data
-    PlaygroundBorder.width = PLAYGROUND_WIDTH + 40;
-    PlaygroundBorder.height = PLAYGROUND_HEIGHT + 40;
-    PlaygroundBorder.x = PLAYGROUND_POSX - 20;
-    PlaygroundBorder.y = PLAYGROUND_POSY - 20;
-    
+    PlaygroundBorder = (Rectangle){
+        .width = PLAYGROUND_WIDTH + 40,
+        .height = PLAYGROUND_HEIGHT + 40,
+        .x = PLAYGROUND_POSX - 20,
+        .y = PLAYGROUND_POSY - 20
+    };
 }
 
 void SetPositionData()
 {
     // Player Position Data
-    Player.transform.width = 20; // Player Width
-    Player.transform.height = 100; // Player Height
-    Player.transform.x = 20 + PLAYGROUND_POSX; // Player X Position
-    Player.transform.y = PLAYGROUND_CENTER_Y - (Player.transform.height / 2) + PLAYGROUND_POSY; // Player Y Position
-    Player.color = WHITE; // Player Color
-    Player.Velocity.x = 0;
-    Player.Velocity.y = 0;
+    Player = (Object){
+        .transform = (Rectangle){
+            .width = 20,
+            .height = 100,
+            .x = PLAYGROUND_POSX + 20,
+            .y = PLAYGROUND_CENTER_Y - (100/*height*/ / 2) + PLAYGROUND_POSY
+        },
+        .color = WHITE,
+        .Velocity = (Vector2){
+            .x = 0,
+            .y = 0
+        }
+    };
     
     // Bot Position Data
-    Bot.transform.width = 20; // Bot Width
-    Bot.transform.height = 100; // Bot Height
-    Bot.transform.x = PLAYGROUND_WIDTH - (20 + Bot.transform.width) + PLAYGROUND_POSX; // Bot X Position
-    Bot.transform.y = PLAYGROUND_CENTER_Y - (Bot.transform.height / 2) + PLAYGROUND_POSY; // Bot Y Position
-    Bot.color = WHITE; // Bot Color
-    Bot.Velocity.x = 0;
-    Bot.Velocity.y = 0;
+    Bot = (Object){
+        .transform = (Rectangle){
+            .width = 20,
+            .height = 100,
+            .x = PLAYGROUND_WIDTH - (20 + 20/*width*/) + PLAYGROUND_POSX,
+            .y = PLAYGROUND_CENTER_Y - (100/*height*/ / 2) + PLAYGROUND_POSY
+        },
+        .color = WHITE,
+        .Velocity = (Vector2){
+            .x = 0,
+            .y = 0
+        }
+    };
     
     // Ball Position Data
-    Ball.transform.width = 20; // Ball Width
-    Ball.transform.height = 20; // Ball Height
-    Ball.transform.x = PLAYGROUND_CENTER_X - (Ball.transform.width / 2) + PLAYGROUND_POSX; // Ball X Position
-    Ball.transform.y = PLAYGROUND_CENTER_Y - (Ball.transform.height / 2) + PLAYGROUND_POSY; // Ball Y Position
-    Ball.color = WHITE; // Ball Color
-    Ball.Velocity.x = 0;
-    Ball.Velocity.y = 0;
+    Ball = (Object){
+        .transform = (Rectangle){
+            .width = 20,
+            .height = 20,
+            .x = PLAYGROUND_CENTER_X - (20/*width*/ / 2) + PLAYGROUND_POSX,
+            .y = PLAYGROUND_CENTER_Y - (20/*height*/ / 2) + PLAYGROUND_POSY
+        },
+        .color = WHITE,
+        .Velocity = (Vector2){
+            .x = 0,
+            .y = 0
+        }
+    };
 }
 //--------------------//

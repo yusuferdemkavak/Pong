@@ -20,13 +20,16 @@ typedef enum
     ButtonStart,
     ButtonSettings,
     ButtonShop,
-    ButtonRetry,
-    ButtonHome,
+    ButtonRetry_Pause,
+    ButtonHome_Pause,
+    ButtonContinue_Pause,
+    ButtonHome_GameOver,
+    Button_Retry_GameOver,
     ButtonExit
 } ButtonIndex;
 
 // Buttons
-extern Button Buttons[7];
+extern Button Buttons[10];
 
 typedef enum
 {
