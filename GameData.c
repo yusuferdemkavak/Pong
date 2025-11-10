@@ -16,7 +16,8 @@ Object Bot;
 Object Ball;
 
 //Clients
-Client Winner;
+Client RoundWinner;
+Client GameWinner;
 
 // Game State
 GameState State;
@@ -41,7 +42,8 @@ void SetStartingData()
     BotScore = 0;
     
     // Winner Starting Data
-    Winner = ClientNone;
+    RoundWinner = ClientNone;
+    GameWinner = ClientNone;
 
     // Game State Starting Data
     State = InMenus;

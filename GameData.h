@@ -57,7 +57,8 @@ extern Object Bot;
 extern Object Ball;
 
 //Clients
-extern Client Winner;
+extern Client RoundWinner;
+extern Client GameWinner;
 
 // Game State
 extern GameState State;

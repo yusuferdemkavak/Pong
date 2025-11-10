@@ -10,6 +10,7 @@ void DrawGameMenu(void);
 void DrawPauseMenu(void);
 void DrawGameOverMenu(void);
 void DrawScoreBoard(int PlayerScore, int BotScore);
+void DrawWinnerText();
 void OnClickStartButton(void);
 void OnClickSettingsButton(void);
 void OnClickShopButton(void);

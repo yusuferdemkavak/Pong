@@ -45,7 +45,9 @@ void DrawPauseMenu()
 // Game Over Menu UI
 void DrawGameOverMenu()
 {
-
+    DrawButton(Buttons[ButtonHome_GameOver]);
+    DrawButton(Buttons[Button_Retry_GameOver]);
+    DrawWinnerText(GameWinner);
 }
 //--------------------//
 
@@ -53,7 +55,6 @@ void DrawGameOverMenu()
 //--------------------//
 void DrawScoreBoard(int PlayerScore, int BotScore)
 {
-
     char ptrPlayerScore[20];
     char ptrBotScore[20];
 
@@ -64,6 +65,24 @@ void DrawScoreBoard(int PlayerScore, int BotScore)
     DrawText(ptrBotScore, WINDOW_CENTER_X + 70, ((PLAYGROUND_POSY - 20) / 2 - 35), 70, WHITE);
     DrawRectangle(WINDOW_CENTER_X - 5, 0, 20, PLAYGROUND_POSY, WHITE);
     DrawRectangle(WINDOW_CENTER_X - 5, PLAYGROUND_POSY + PLAYGROUND_HEIGHT, 20, PLAYGROUND_POSY, WHITE);
+}
+
+void DrawWinnerText(Client winner)
+{
+    char * WinnerText = MemAlloc(20);
+
+    switch (winner)
+    {
+    case ClientPlayer:
+        WinnerText = "You Won!";
+        break;
+    case ClientBot:
+        WinnerText = "You Lost...";
+    default:
+        break;
+    }
+
+    DrawText(WinnerText, WINDOW_CENTER_X - MeasureText(WinnerText, 100) / 2, WINDOW_CENTER_Y - 80, 100, WHITE);
 }
 //--------------------//
 

@@ -61,6 +61,10 @@ void HandleInput()
         case ShopMenu:
             break;
         case GameOverMenu:
+            if (CheckMouseHover(Buttons[ButtonHome_GameOver].transform))
+                OnClickHomeButton();
+            else if (CheckMouseHover(Buttons[Button_Retry_GameOver].transform))
+                OnClickRetryButton();
             break;
         default:
             break;

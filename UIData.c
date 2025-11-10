@@ -19,7 +19,7 @@ void SetUIData()
             .width = 640,
             .height = 100,
             .x = WINDOW_CENTER_X - 640 / 2,
-            .y = WINDOW_CENTER_Y + 20,
+            .y = WINDOW_CENTER_Y + 20
         },
         .color = BLACK,
         .text = "Start Game",
@@ -32,7 +32,7 @@ void SetUIData()
             .width = 300,
             .height = 100,
             .x = WINDOW_CENTER_X - 300/*width*/ - 20,
-            .y = WINDOW_CENTER_Y + 60 + 100/*height*/,
+            .y = WINDOW_CENTER_Y + 60 + 100/*height*/
         },
         .color = BLACK,
         .text = "Settings",
@@ -45,7 +45,7 @@ void SetUIData()
             .width = 300,
             .height = 100,
             .x = WINDOW_CENTER_X + 20,
-            .y = WINDOW_CENTER_Y + 60 + 100/*height*/,
+            .y = WINDOW_CENTER_Y + 60 + 100/*height*/
         },
         .color = BLACK,
         .text = "Shop",
@@ -58,7 +58,7 @@ void SetUIData()
             .width = 100,
             .height = 100,
             .x = WINDOW_WIDTH - 100/*width*/ - 20,
-            .y = WINDOW_HEIGHT - 100/*height*/ - 20,
+            .y = WINDOW_HEIGHT - 100/*height*/ - 20
         },
         .color = BLACK,
         .text = "Exit",
@@ -71,7 +71,7 @@ void SetUIData()
             .width = 600,
             .height = 100,
             .x = WINDOW_CENTER_X - 600/*width*/ / 2,
-            .y = WINDOW_CENTER_Y + 100,
+            .y = WINDOW_CENTER_Y + 100
         },
         .color = BLACK,
         .text = "Home",
@@ -84,7 +84,7 @@ void SetUIData()
             .width = 280,
             .height = 100,
             .x = WINDOW_CENTER_X - 280/*width*/ - 20,
-            .y = WINDOW_CENTER_Y - 40,
+            .y = WINDOW_CENTER_Y - 40
         },
         .color = BLACK,
         .text = "Retry",
@@ -97,10 +97,36 @@ void SetUIData()
             .width = 280,
             .height = 100,
             .x = WINDOW_CENTER_X + 20,
-            .y = WINDOW_CENTER_Y - 40,
+            .y = WINDOW_CENTER_Y - 40
         },
         .color = BLACK,
         .text = "Continue",
+        .FontSize = 40
+    };
+
+    // Home Button (Game Over Menu) Data
+    Buttons[ButtonHome_GameOver] = (Button){
+        .transform = {
+            .width = 280,
+            .height = 100,
+            .x = WINDOW_CENTER_X - 280/*width*/ - 20,
+            .y = WINDOW_CENTER_Y + 80
+        },
+        .color = BLACK,
+        .text = "Home",
+        .FontSize = 40
+    };
+
+    // Retry Button (Game Over Menu) Data
+    Buttons[Button_Retry_GameOver] = (Button){
+        .transform = {
+            .width = 280,
+            .height = 100,
+            .x = WINDOW_CENTER_X + 20,
+            .y = WINDOW_CENTER_Y + 80
+        },
+        .color = BLACK,
+        .text = "Retry",
         .FontSize = 40
     };
 }

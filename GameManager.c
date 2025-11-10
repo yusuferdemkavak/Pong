@@ -7,6 +7,8 @@ void CheckState()
     switch (State)
         {
         case InMenus:
+            ShowCursor(); // Shows Cursor
+
             // Render UI
             switch (Menu)
             {
@@ -93,7 +95,7 @@ void ResetRound(Client winner)
         break;
     }
 
-    Winner = ClientNone;
+    RoundWinner = ClientNone;
     SetPositionData();
     isWaiting = true;
     StartTime = GetTime();
@@ -131,8 +133,10 @@ void EndGame(Client winner)
     switch (winner)
     {
     case ClientPlayer:
+        GameWinner = ClientPlayer;
         break;
     case ClientBot:
+        GameWinner = ClientBot;
         break;
     default:
         break;
@@ -239,13 +243,13 @@ void CheckCollisions()
     
     if (Ball.transform.x <= PLAYGROUND_POSX - Ball.transform.width)
     {
-        Winner = ClientBot;
-        ResetRound(Winner);
+        RoundWinner = ClientBot;
+        ResetRound(RoundWinner);
     }
     else if (Ball.transform.x >= PLAYGROUND_POSX + PLAYGROUND_WIDTH)
     {
-        Winner = ClientPlayer;
-        ResetRound(Winner);
+        RoundWinner = ClientPlayer;
+        ResetRound(RoundWinner);
     }        
 }
 //--------------------//
